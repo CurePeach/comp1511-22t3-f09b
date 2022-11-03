@@ -21,7 +21,7 @@ int main(void) {
     // first = insert_start(first, 3);
     // first = insert_last(first, 3);
     // first = insert_middle(first, 3);
-    printf("First: ");
+    printf("First (%d): ", list_length(first));
     print_list(first);
 
     struct node *second = NULL;
@@ -46,17 +46,37 @@ int main(void) {
 
 // Prints a linked list
 void print_list(struct node *head) {
-    // TODO
+    struct node *curr = head;
+    while (curr != NULL) {
+        printf("%d -> ", curr->data);
+
+        curr = curr->next;
+    }
+    printf("X\n");
 }
 
 // Gets the length of the linked list
 int list_length(struct node *head) {
-    // TODO
+    int counter = 0;
+    struct node *curr = head;
+    while (curr != NULL) {
+        counter++;
+        curr = curr->next;
+    }
+
+    return counter;
 }
 
 // Inserts at the start of the linked list
 struct node *insert_start(struct node *head, int data) {
-    // TODO
+    // case 1: empty list
+    // case 2: one item list
+    // case 3: everything else
+    struct node *new = create_node(data, head);
+    head = new;
+    return head;
+
+    // return create_node(data, head);
 }
 
 // Inserts at the end of the linked list
