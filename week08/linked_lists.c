@@ -13,6 +13,7 @@ struct node *insert_start(struct node *head, int data);
 struct node *insert_middle(struct node *head, int data);
 struct node *insert_last(struct node *head, int data);
 struct node *create_node(int data, struct node *next);
+struct node *find_last_node(struct node *head);
 
 int main(void) {
     struct node *first = create_node(5, NULL);
@@ -81,7 +82,36 @@ struct node *insert_start(struct node *head, int data) {
 
 // Inserts at the end of the linked list
 struct node *insert_last(struct node *head, int data) {
-    // TODO
+    // case 1: empty list
+    if (head == NULL) {
+        head = insert_start(head, data);
+        return head;
+    }
+
+    // case 3: everything else
+    struct node *last = find_last_node(head);
+    last->next = create_node(data, NULL);
+
+    return head;
+}
+
+struct node *find_last_node(struct node *head) {
+    // Expanded version:
+    // struct node *curr = head;
+    // struct node *last = head;
+    // while (curr != NULL) {
+    //     if (curr->next == NULL) {
+    //         last = curr;
+    //     }
+
+    //     curr = curr->next;
+    // }
+
+    struct node *curr = head;
+    while (curr->next != NULL) {
+        curr = curr->next;
+    }
+    return curr;
 }
 
 // Inserts in the middle of the linked list
